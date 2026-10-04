@@ -1,0 +1,167 @@
+[
+ {
+  "id": "s0",
+  "name": "Maize flour 10 kg",
+  "cat": "Food",
+  "icon": "🌽",
+  "price": 18000,
+  "bulkPrice": 15000,
+  "bulkMin": 5,
+  "supplier": "Juba Grain Traders",
+  "stock": 100
+ },
+ {
+  "id": "s1",
+  "name": "Sorghum 25 kg",
+  "cat": "Food",
+  "icon": "🌾",
+  "price": 32000,
+  "bulkPrice": 28000,
+  "bulkMin": 5,
+  "supplier": "Wau Farmers Co-op",
+  "stock": 100
+ },
+ {
+  "id": "s2",
+  "name": "Cooking oil 5 L",
+  "cat": "Food",
+  "icon": "🫒",
+  "price": 24000,
+  "bulkPrice": 21500,
+  "bulkMin": 6,
+  "supplier": "Nile Wholesale",
+  "stock": 100
+ },
+ {
+  "id": "s3",
+  "name": "Sugar 10 kg",
+  "cat": "Food",
+  "icon": "🍬",
+  "price": 22000,
+  "bulkPrice": 19500,
+  "bulkMin": 5,
+  "supplier": "Nile Wholesale",
+  "stock": 100
+ },
+ {
+  "id": "s4",
+  "name": "Bar soap carton",
+  "cat": "Household",
+  "icon": "🧼",
+  "price": 16000,
+  "bulkPrice": 14000,
+  "bulkMin": 4,
+  "supplier": "Yei Supplies",
+  "stock": 100
+ },
+ {
+  "id": "s5",
+  "name": "Charcoal stove",
+  "cat": "Household",
+  "icon": "🔥",
+  "price": 20000,
+  "bulkPrice": 17500,
+  "bulkMin": 3,
+  "supplier": "Yei Supplies",
+  "stock": 100
+ },
+ {
+  "id": "s6",
+  "name": "Jerrycan 20 L",
+  "cat": "Household",
+  "icon": "🛢️",
+  "price": 9000,
+  "bulkPrice": 7500,
+  "bulkMin": 10,
+  "supplier": "Nile Wholesale",
+  "stock": 100
+ },
+ {
+  "id": "s7",
+  "name": "Mosquito net",
+  "cat": "Health",
+  "icon": "🛏️",
+  "price": 8000,
+  "bulkPrice": 6500,
+  "bulkMin": 10,
+  "supplier": "Bor Health Depot",
+  "stock": 100
+ },
+ {
+  "id": "s8",
+  "name": "Water purifier tablets",
+  "cat": "Health",
+  "icon": "💧",
+  "price": 6000,
+  "bulkPrice": 5000,
+  "bulkMin": 10,
+  "supplier": "Bor Health Depot",
+  "stock": 100
+ },
+ {
+  "id": "s9",
+  "name": "Groundnut seed 10 kg",
+  "cat": "Farm supplies",
+  "icon": "🥜",
+  "price": 26000,
+  "bulkPrice": 23000,
+  "bulkMin": 5,
+  "supplier": "Wau Farmers Co-op",
+  "stock": 100
+ },
+ {
+  "id": "s10",
+  "name": "Hoe (farm)",
+  "cat": "Farm supplies",
+  "icon": "⛏️",
+  "price": 7000,
+  "bulkPrice": 6000,
+  "bulkMin": 10,
+  "supplier": "Yei Supplies",
+  "stock": 100
+ },
+ {
+  "id": "s11",
+  "name": "Cement 50 kg",
+  "cat": "Building",
+  "icon": "🧱",
+  "price": 30000,
+  "bulkPrice": 28000,
+  "bulkMin": 10,
+  "supplier": "Juba Build Mart",
+  "stock": 100
+ },
+ {
+  "id": "s12",
+  "name": "Iron sheet (roofing)",
+  "cat": "Building",
+  "icon": "🏠",
+  "price": 15000,
+  "bulkPrice": 13500,
+  "bulkMin": 10,
+  "supplier": "Juba Build Mart",
+  "stock": 100
+ },
+ {
+  "id": "s13",
+  "name": "Solar lamp + charger",
+  "cat": "Phones & power",
+  "icon": "☀️",
+  "price": 25000,
+  "bulkPrice": 22000,
+  "bulkMin": 5,
+  "supplier": "Torit Solar",
+  "stock": 100
+ },
+ {
+  "id": "s14",
+  "name": "Phone airtime voucher",
+  "cat": "Phones & power",
+  "icon": "📱",
+  "price": 5000,
+  "bulkPrice": 4800,
+  "bulkMin": 20,
+  "supplier": "Torit Solar",
+  "stock": 100
+ }
+]

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Taitech Market</title>
+<link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#0b7a43">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#101828;--mute:#667085;--line:#e4e7ec;--pri:#0b7a43;--pri2:#e7f5ec;--on:#fff;--warn:#b54708;--warnbg:#fef0c7;--bad:#d92d20;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1210;--card:#151d1a;--ink:#f2f4f3;--mute:#9aa7a1;--line:#26322d;--pri:#3fc27a;--pri2:#16301f;--on:#06140c;--warn:#fdb022;--warnbg:#3a2c0a;--bad:#ff7a70}}
+:root[data-theme="dark"]{--bg:#0c1210;--card:#151d1a;--ink:#f2f4f3;--mute:#9aa7a1;--line:#26322d;--pri:#3fc27a;--pri2:#16301f;--on:#06140c;--warn:#fdb022;--warnbg:#3a2c0a;--bad:#ff7a70}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.5}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+.bar{max-width:1120px;margin:auto;display:flex;gap:.6rem;align-items:center;padding:.7rem 1rem;flex-wrap:wrap}
+.logo{font-weight:800;font-size:1.2rem;margin-inline-end:auto;display:flex;align-items:center;gap:.5rem}
+.logo i{width:1.7rem;height:1.7rem;border-radius:8px;background:var(--pri);display:inline-block}
+.sel,.ghost{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.45rem .7rem}
+.cartbtn{background:var(--pri);color:var(--on);border:0;border-radius:10px;padding:.5rem .9rem;font-weight:600}
+nav{max-width:1120px;margin:auto;display:flex;gap:.2rem;padding:0 1rem;overflow-x:auto}
+nav button{background:none;border:0;border-bottom:2px solid transparent;padding:.6rem .8rem;font-weight:600;color:var(--mute);white-space:nowrap}
+nav button[aria-selected=true]{color:var(--ink);border-color:var(--pri)}
+.banner{background:var(--warnbg);color:var(--warn);text-align:center;padding:.4rem;font-size:.9rem;display:none}
+.banner.on{display:block}
+main{max-width:1120px;margin:auto;padding:1.2rem 1rem 3rem}
+.hero{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(1.2rem,4vw,2.2rem);margin-bottom:1.2rem}
+h1{font-size:clamp(1.6rem,4.5vw,2.5rem);line-height:1.1;margin:0 0 .5rem;font-weight:800;letter-spacing:-.02em}
+h2{margin:1.4rem 0 .6rem}
+.sub{color:var(--mute);margin:0 0 1rem;max-width:58ch}
+.search{width:100%;max-width:520px;padding:.8rem 1rem;border:1px solid var(--line);background:var(--bg);border-radius:12px}
+.chips{display:flex;gap:.4rem;overflow-x:auto;margin:.8rem 0}
+.chip{white-space:nowrap;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:.4rem 1rem}
+.chip[aria-pressed=true]{background:var(--pri);color:var(--on);border-color:var(--pri)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem}
+.p{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem;display:flex;flex-direction:column;gap:.2rem}
+.em{font-size:2.2rem;background:var(--pri2);border-radius:12px;height:4.2rem;display:grid;place-items:center;margin-bottom:.4rem}
+.p h3{margin:0;font-size:1rem}
+.p small{color:var(--mute)}
+.price{font-weight:800;font-size:1.15rem;margin-top:.2rem}
+.bulk{font-size:.82rem;color:var(--pri);font-weight:600}
+.low{font-size:.82rem;color:var(--warn);font-weight:600}
+.btn{background:var(--pri);color:var(--on);border:0;border-radius:10px;padding:.65rem 1rem;font-weight:600}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.alt{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.p .btn{margin-top:auto}
+.empty{padding:2rem;text-align:center;color:var(--mute);border:1px dashed var(--line);border-radius:16px;grid-column:1/-1}
+aside{position:fixed;inset:0 0 0 auto;width:min(430px,100%);background:var(--card);border-inline-start:1px solid var(--line);transform:translateX(105%);transition:transform .2s;z-index:10;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+[dir=rtl] aside{inset:0 auto 0 0;transform:translateX(-105%)}
+aside.open{transform:none!important}
+.ah{display:flex;justify-content:space-between;align-items:center;padding:1rem;border-bottom:1px solid var(--line)}
+.ab{padding:1rem;overflow:auto;flex:1}
+.line{display:flex;justify-content:space-between;gap:.6rem;padding:.7rem 0;border-bottom:1px solid var(--line)}
+.qty{display:flex;align-items:center;gap:.4rem}
+.qty button{width:2rem;height:2rem;border-radius:8px;border:1px solid var(--line);background:var(--bg)}
+.tot{display:flex;justify-content:space-between;padding:.2rem 0}
+.tot.big{font-weight:800;font-size:1.15rem;border-top:1px solid var(--line);margin-top:.4rem;padding-top:.6rem}
+label{display:block;font-weight:600;font-size:.9rem;margin:.8rem 0 .25rem}
+.f input,.f select{width:100%;padding:.65rem .8rem;border:1px solid var(--line);background:var(--bg);border-radius:10px}
+.pay{display:grid;gap:.4rem}
+.pay label{display:flex;gap:.5rem;align-items:center;font-weight:400;border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;margin:0}
+.pay input{width:auto}
+.err{color:var(--bad);font-size:.9rem;min-height:1.2rem;margin:.3rem 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem;margin-bottom:.8rem}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.1rem;max-width:560px}
+.tag{display:inline-block;background:var(--pri2);color:var(--pri);border-radius:99px;padding:.1rem .7rem;font-size:.8rem;font-weight:600}
+.steps{display:flex;gap:.3rem;margin:.6rem 0}
+.steps span{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.steps span.on{background:var(--pri)}
+.stk{display:flex;gap:.5rem;align-items:center}
+.stk input{width:5.5rem;padding:.4rem .5rem;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9;display:none}
+.scrim.show{display:block}
+.note{font-size:.85rem;color:var(--mute)}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <div class="logo"><i></i>Taitech Market</div>
+  <select class="sel" id="lang" aria-label="Language"><option value="en">English</option><option value="ar">العربية</option></select>
+  <select class="sel" id="town" aria-label="Delivery town"></select>
+  <button class="cartbtn" id="openCart"><span data-t="cart"></span> <span id="cc">0</span></button>
+</div>
+<nav role="tablist" id="nav"></nav><div class="banner" id="offline"></div></header>
+<main id="main"></main>
+<div class="scrim" id="scrim"></div>
+<aside id="cart"><div class="ah"><strong id="ct"></strong><button class="btn alt" id="closeCart" data-t="close"></button></div><div class="ab" id="cb"></div></aside>
+
+<script>
+const TXT={
+en:{shop:'Shop',orders:'My orders',sell:'Supplier hub',cart:'Cart',close:'Close',h1:'Everyday goods, delivered to your town',sub:'Order one item or a full carton from suppliers across South Sudan. Pay by mobile money or cash on delivery.',search:'Search maize, cement, solar…',all:'All',add:'Add to cart',added:'Added ✓',out:'Out of stock',left:'left',by:'Supplier',bulk:'each when you buy',plus:'or more',items:'Items',deliv:'Delivery to',total:'Total',empty:'Your cart is empty. Add something from the shop.',next:'Continue to checkout',back:'Back',name:'Full name',phone:'Phone number',addr:'Delivery area and landmark',pay:'Payment',cod:'Cash on delivery',place:'Place order',txn:'Mobile money transaction ID (optional)',errc:'Enter your name, delivery area and a phone number with at least 9 digits.',stock:'Not enough stock for: ',thanks:'Order placed',noord:'No orders yet. Your orders will appear here.',queued:'You are offline. Your order is saved and will send when you are back online.',off:'You are offline. Browsing works and orders will be saved until you reconnect.',pm:'Pay with',st:['Received','Confirmed','Out for delivery','Delivered'],sh:'Your supplier business',sn:'Business name',lst:'List a new product',pn:'Product name',cat:'Category',pr:'Price (SSP)',bp:'Bulk price (SSP, optional)',bm:'Bulk starts at (quantity)',stq:'Stock quantity',lbtn:'List product',lerr:'Add a product name, your business name, a price and a stock amount.',berr:'Bulk price must be lower than the normal price and bulk quantity at least 2.',mine:'Your products and stock',inc:'Incoming orders',none:'Nothing yet.',save:'Save',mode:'Shared online mode: orders and stock sync between users.',loc:'Offline mode: data stays on this device only.'},
+ar:{shop:'المتجر',orders:'طلباتي',sell:'مركز الموردين',cart:'السلة',close:'إغلاق',h1:'بضائع يومية تصلك إلى مدينتك',sub:'اطلب قطعة واحدة أو كرتونة كاملة من موردين في جميع أنحاء جنوب السودان. ادفع بالمال عبر الهاتف أو عند الاستلام.',search:'ابحث عن ذرة، إسمنت، طاقة شمسية…',all:'الكل',add:'أضف إلى السلة',added:'تمت الإضافة ✓',out:'نفدت الكمية',left:'متبقي',by:'المورد',bulk:'للقطعة عند شراء',plus:'أو أكثر',items:'المنتجات',deliv:'التوصيل إلى',total:'الإجمالي',empty:'سلتك فارغة. أضف شيئًا من المتجر.',next:'متابعة إلى الدفع',back:'رجوع',name:'الاسم الكامل',phone:'رقم الهاتف',addr:'منطقة التوصيل وأقرب معلم',pay:'الدفع',cod:'الدفع عند الاستلام',place:'تأكيد الطلب',txn:'رقم عملية المال عبر الهاتف (اختياري)',errc:'أدخل اسمك ومنطقة التوصيل ورقم هاتف من 9 أرقام على الأقل.',stock:'الكمية غير كافية لـ: ',thanks:'تم تقديم الطلب',noord:'لا توجد طلبات بعد. ستظهر طلباتك هنا.',queued:'أنت غير متصل. تم حفظ طلبك وسيُرسل عند عودة الاتصال.',off:'أنت غير متصل. يمكنك التصفح وسيتم حفظ الطلبات حتى يعود الاتصال.',pm:'الدفع عبر',st:['تم الاستلام','تم التأكيد','في الطريق','تم التسليم'],sh:'نشاطك التجاري كمورد',sn:'اسم النشاط التجاري',lst:'أضف منتجًا جديدًا',pn:'اسم المنتج',cat:'الفئة',pr:'السعر (جنيه)',bp:'سعر الجملة (اختياري)',bm:'تبدأ الجملة من كمية',stq:'كمية المخزون',lbtn:'أضف المنتج',lerr:'أدخل اسم المنتج واسم النشاط والسعر وكمية المخزون.',berr:'يجب أن يكون سعر الجملة أقل من السعر العادي والكمية 2 على الأقل.',mine:'منتجاتك والمخزون',inc:'الطلبات الواردة',none:'لا يوجد شيء بعد.',save:'حفظ',mode:'وضع المزامنة: الطلبات والمخزون تتزامن بين المستخدمين.',loc:'وضع محلي: البيانات على هذا الجهاز فقط.'}};
+const TOWNS={Juba:3000,Wau:6000,Malakal:7000,Yei:4500,Bor:5000,Torit:5500,Yambio:6500,Rumbek:6000,Aweil:7000,Bentiu:8000};
+const CATS=['Food','Household','Farm supplies','Building','Phones & power','Health'];
+const CATAR={Food:'غذاء',Household:'منزلية','Farm supplies':'مستلزمات زراعية',Building:'بناء','Phones & power':'هواتف وطاقة',Health:'صحة'};
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const L=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
+const S=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let lang=L('tm_lang','en'),T=TXT[lang];
+const fmt=n=>(lang==='ar'?'جنيه ':'SSP ')+Math.round(n).toLocaleString('en-US');
+const CACHE=L('tm_cache',{});let products=CACHE.p||[],orders=CACHE.o||[],queue=L('tm_queue',[]),cart=L('tm_cart',{}),town=L('tm_town','Juba'),token=L('tm_token',null),user=L('tm_user',null),biz='';
+let view='shop',cat='All',q='',stage='cart',err='';
+const all=()=>products;
+const find=id=>all().find(p=>p.id===id);
+const stockOf=p=>p.stock??0;
+const unit=(p,n)=>(p.bulkMin&&n>=p.bulkMin)?p.bulkPrice:p.price;
+
+/* data layer: REST API served by server.js */
+let lastSig='';
+async function api(path,opt={}){
+  const r=await fetch('/api'+path,{method:opt.method||'GET',headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:opt.body?JSON.stringify(opt.body):undefined});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok)throw Object.assign(new Error(j.error||'Error'),{status:r.status});
+  return j;
+}
+async function pull(){
+  try{
+    const p=await api('/products');let o=[];
+    if(token){try{o=await api('/orders')}catch(e){if(e.status===401){token=null;user=null;S('tm_token',null);S('tm_user',null)}}}
+    products=p;orders=o;S('tm_cache',{p,o});
+    const sig=JSON.stringify([p,o]);
+    if(sig!==lastSig){lastSig=sig;if(!/INPUT|SELECT/.test(document.activeElement.tagName))render()}
+  }catch(e){}
+}
+async function flush(){
+  if(!token||!navigator.onLine||!queue.length)return;const rest=[];
+  for(const o of queue){try{await api('/orders',{method:'POST',body:o})}catch(e){if(!e.status)rest.push(o)}}
+  queue=rest;S('tm_queue',queue);pull();
+}
+const AU={en:{si:'Sign in',reg:'Create account',pw:'Password (6+ characters)',out:'Sign out',biz:'Business name (suppliers only)',need:'Sign in under My orders to place an order.',bad:'Could not complete that.'},
+ar:{si:'تسجيل الدخول',reg:'إنشاء حساب',pw:'كلمة المرور (6 أحرف على الأقل)',out:'تسجيل الخروج',biz:'اسم النشاط التجاري (للموردين فقط)',need:'سجّل الدخول من «طلباتي» لتأكيد الطلب.',bad:'تعذر إتمام الطلب.'}};
+function authBox(){
+  const A=AU[lang];
+  if(user)return `<div class="box"><strong>${esc(user.name)}</strong> · ${esc(user.phone)}${user.business?' · '+esc(user.business):''}<br><button class="btn alt" id="out" style="margin-top:.6rem">${A.out}</button></div>`;
+  return `<div class="box f"><label for="an">${T.name}</label><input id="an" autocomplete="name"><label for="aph">${T.phone}</label><input id="aph" type="tel" autocomplete="tel"><label for="apw">${A.pw}</label><input id="apw" type="password"><label for="ab">${A.biz}</label><input id="ab"><div class="err" id="aerr" role="alert"></div><div class="two"><button class="btn alt" id="si">${A.si}</button><button class="btn" id="rg">${A.reg}</button></div></div>`;
+}
+function bindAuth(){
+  const out=$('#out');
+  if(out)out.onclick=()=>{token=null;user=null;S('tm_token',null);S('tm_user',null);orders=[];render()};
+  const go=async path=>{try{const r=await api(path,{method:'POST',body:{name:$('#an').value.trim(),phone:$('#aph').value.trim(),password:$('#apw').value,business:$('#ab').value.trim()}});token=r.token;user=r.user;S('tm_token',token);S('tm_user',user);lastSig='';await pull();render();flush()}catch(e){$('#aerr').textContent=e.message}};
+  if($('#si')){$('#si').onclick=()=>go('/login');$('#rg').onclick=()=>go('/register')}
+}
+
+function applyLang(){
+  T=TXT[lang];document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-t]').forEach(e=>e.textContent=T[e.dataset.t]);
+  $('#nav').innerHTML=[['shop',T.shop],['orders',T.orders],['sell',T.sell]].map(([v,t])=>`<button role="tab" data-v="${v}" aria-selected="${v===view}">${t}</button>`).join('');
+  document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{view=b.dataset.v;applyLang();render()});
+  $('#offline').textContent=T.off;
+  $('#town').innerHTML=Object.keys(TOWNS).map(t=>`<option>${t}</option>`).join('');$('#town').value=town;
+  $('#lang').value=lang;
+}
+$('#lang').onchange=e=>{lang=e.target.value;S('tm_lang',lang);applyLang();render()};
+$('#town').onchange=e=>{town=e.target.value;S('tm_town',town);renderCart()};
+const setOnline=()=>{$('#offline').classList.toggle('on',!navigator.onLine);flush()};
+addEventListener('online',setOnline);addEventListener('offline',setOnline);
+
+function render(){ if(view==='shop')shop();else if(view==='orders')ordersView();else sell(); renderCart()}
+const catName=c=>lang==='ar'?(CATAR[c]||c):c;
+
+function shop(){
+  if(document.activeElement&&document.activeElement.id==='q')return;
+  const list=all().filter(p=>(cat==='All'||p.cat===cat)&&p.name.toLowerCase().includes(q.toLowerCase()));
+  $('#main').innerHTML=`<div class="hero"><h1>${T.h1}</h1><p class="sub">${T.sub}</p>
+  <input class="search" id="q" type="search" placeholder="${T.search}" value="${esc(q)}" aria-label="${T.search}">
+  <div class="chips">${['All',...CATS].map(c=>`<button class="chip" aria-pressed="${c===cat}" data-c="${c}">${c==='All'?T.all:catName(c)}</button>`).join('')}</div></div>
+  <div class="grid">${list.map(p=>{const s=stockOf(p);return`<div class="p"><div class="em" aria-hidden="true">${p.icon}</div><h3>${esc(p.name)}</h3><small>${T.by}: ${esc(p.supplier)}</small>
+  <div class="price">${fmt(p.price)}</div>${p.bulkMin?`<div class="bulk">${fmt(p.bulkPrice)} ${T.bulk} ${p.bulkMin} ${T.plus}</div>`:''}
+  ${s>0&&s<=10?`<div class="low">${s} ${T.left}</div>`:''}
+  <button class="btn" data-add="${p.id}" ${s<=0?'disabled':''}>${s<=0?T.out:T.add}</button></div>`}).join('')||'<div class="empty">—</div>'}</div>`;
+  const qi=$('#q');qi.oninput=e=>{q=e.target.value;const pos=e.target.selectionStart;document.activeElement.blur();shop();const n=$('#q');n.focus();n.setSelectionRange(pos,pos)};
+  document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{cat=b.dataset.c;shop()});
+  document.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{const p=find(b.dataset.add);if((cart[p.id]||0)>=stockOf(p))return;cart[p.id]=(cart[p.id]||0)+1;S('tm_cart',cart);renderCart();b.textContent=T.added;setTimeout(()=>b.textContent=T.add,900)});
+}
+
+function totals(){let sub=0,n=0;for(const id in cart){const p=find(id);if(!p){delete cart[id];continue}sub+=unit(p,cart[id])*cart[id];n+=cart[id]}const fee=n?TOWNS[town]:0;return{sub,fee,total:sub+fee,n}}
+
+function renderCart(){
+  const t=totals();$('#cc').textContent=t.n;const cb=$('#cb');if(stage==='done')return;
+  if(!t.n){$('#ct').textContent=T.cart;cb.innerHTML=`<div class="empty">${T.empty}</div>`;return}
+  if(stage==='cart'){
+    $('#ct').textContent=T.cart;
+    cb.innerHTML=Object.keys(cart).map(id=>{const p=find(id),n=cart[id];return`<div class="line"><div><strong>${esc(p.name)}</strong><br><small class="note">${fmt(unit(p,n))}</small></div><div class="qty"><button data-m="${id}" aria-label="−">−</button><span>${n}</span><button data-p="${id}" aria-label="+">+</button></div></div>`}).join('')+
+    `<div class="tot"><span>${T.items}</span><span>${fmt(t.sub)}</span></div><div class="tot"><span>${T.deliv} ${esc(town)}</span><span>${fmt(t.fee)}</span></div><div class="tot big"><span>${T.total}</span><span>${fmt(t.total)}</span></div><button class="btn" style="width:100%;margin-top:.8rem" id="go">${T.next}</button>`;
+    cb.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{const i=b.dataset.m;cart[i]--;if(cart[i]<=0)delete cart[i];S('tm_cart',cart);renderCart()});
+    cb.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{const i=b.dataset.p;if(cart[i]<stockOf(find(i)))cart[i]++;S('tm_cart',cart);renderCart()});
+    $('#go').onclick=()=>{stage='checkout';renderCart()};
+  }else{
+    $('#ct').textContent=T.pay;
+    cb.innerHTML=`<div class="f"><label for="nm">${T.name}</label><input id="nm" autocomplete="name"><label for="ph">${T.phone}</label><input id="ph" type="tel" placeholder="+211 9xx xxx xxx" autocomplete="tel"><label for="ad">${T.addr}</label><input id="ad">
+    <label>${T.pay}</label><div class="pay"><label><input type="radio" name="pm" value="MTN MoMo" checked> MTN Mobile Money</label><label><input type="radio" name="pm" value="Digicash"> Digicash</label><label><input type="radio" name="pm" value="Cash on delivery"> ${T.cod}</label></div>
+    <label for="tx">${T.txn}</label><input id="tx"><div class="err" id="err" role="alert">${err}</div><div class="tot big"><span>${T.total}</span><span>${fmt(t.total)}</span></div>
+    <div class="two" style="margin-top:.8rem"><button class="btn alt" id="back">${T.back}</button><button class="btn" id="place">${T.place}</button></div></div>`;
+    $('#back').onclick=()=>{stage='cart';err='';renderCart()};
+    $('#place').onclick=async()=>{
+      const nm=$('#nm').value.trim(),ph=$('#ph').value.trim(),ad=$('#ad').value.trim(),pm=document.querySelector('input[name=pm]:checked').value;
+      if(!nm||!ad||ph.replace(/\D/g,'').length<9){err=T.errc;renderCart();return}
+      const short=Object.keys(cart).filter(i=>cart[i]>stockOf(find(i)));
+      if(short.length){err=T.stock+short.map(i=>find(i).name).join(', ');renderCart();return}
+      err='';
+      if(!token){err=AU[lang].need;renderCart();return}
+      const o={town,nm,ph,ad,pm,tx:$('#tx').value.trim(),items:Object.keys(cart).map(i=>({id:i,q:cart[i]}))};
+      let r='sent';
+      try{const x=await api('/orders',{method:'POST',body:o});o.id=x.id;o.total=x.total}
+      catch(e){if(e.status){err=e.message;renderCart();return}o.id='PENDING';o.total=t.total;queue.push(o);S('tm_queue',queue);r='queued'}
+      pull();cart={};S('tm_cart',cart);stage='done';$('#ct').textContent=T.thanks;
+      $('#cb').innerHTML=`<h2 style="margin:.2rem 0">${esc(nm)} ✓</h2><p><strong>${o.id}</strong> · ${fmt(o.total)}</p><p>${pm==='Cash on delivery'?T.cod:T.pm+' '+esc(pm)}</p>${r==='queued'?`<p class="err">${T.queued}</p>`:''}<button class="btn" id="see">${T.orders}</button>`;
+      $('#cc').textContent=0;$('#see').onclick=()=>{closeCart();view='orders';applyLang();render()};
+    };
+  }
+}
+function openCart(){if(stage==='done')stage='cart';$('#cart').classList.add('open');$('#scrim').classList.add('show');renderCart()}
+function closeCart(){$('#cart').classList.remove('open');$('#scrim').classList.remove('show');if(stage!=='cart')stage='cart'}
+$('#openCart').onclick=openCart;$('#closeCart').onclick=closeCart;$('#scrim').onclick=closeCart;
+addEventListener('keydown',e=>{if(e.key==='Escape')closeCart()});
+
+function bar(s){return`<div class="steps">${T.st.map((_,i)=>`<span class="${i<=s?'on':''}"></span>`).join('')}</div>`}
+function ordersView(){
+  const mine=orders.filter(o=>user&&o.buyer===user.id);
+  $('#main').innerHTML=`<h1>${T.orders}</h1>${authBox()}<div style="height:1rem"></div>`+(mine.map(o=>`<div class="card"><div class="stk" style="justify-content:space-between"><strong>${o.id}</strong><span class="tag">${T.st[o.status||0]}</span></div><small class="note">${o.date} · ${esc(o.town)} · ${esc(o.pm)}</small>${bar(o.status||0)}<div>${o.items.map(i=>`${i.q} × ${esc(i.n)}`).join(', ')}</div><div class="price">${fmt(o.total)}</div></div>`).join('')||`<div class="empty">${T.noord}</div>`);bindAuth();
+}
+
+function sell(){
+  biz=user&&user.business||'';
+  const mineP=all().filter(p=>biz&&p.supplier===biz);
+  const inc=orders.filter(o=>biz&&o.items.some(i=>i.s===biz));
+  $('#main').innerHTML=`<h1>${T.sell}</h1>
+  ${authBox()}
+  <div class="box f" style="margin-top:1rem"><h3 style="margin:0">${T.lst}</h3><label for="pn">${T.pn}</label><input id="pn"><label for="pc">${T.cat}</label><select id="pc">${CATS.map(c=>`<option value="${c}">${catName(c)}</option>`).join('')}</select>
+  <div class="two"><div><label for="pp">${T.pr}</label><input id="pp" type="number" min="1" inputmode="numeric"></div><div><label for="pb">${T.bp}</label><input id="pb" type="number" min="1" inputmode="numeric"></div></div>
+  <div class="two"><div><label for="pm2">${T.bm}</label><input id="pm2" type="number" min="2" inputmode="numeric"></div><div><label for="pst">${T.stq}</label><input id="pst" type="number" min="0" inputmode="numeric"></div></div>
+  <div class="err" id="serr" role="alert"></div><button class="btn" id="add">${T.lbtn}</button></div>
+  <h2>${T.mine}</h2><div class="grid">${mineP.map(p=>`<div class="p"><div class="em">${p.icon}</div><h3>${esc(p.name)}</h3><div class="price">${fmt(p.price)}</div><div class="stk"><input type="number" min="0" value="${stockOf(p)}" id="k${p.id}" aria-label="${T.stq}"><button class="btn alt" data-k="${p.id}">${T.save}</button></div></div>`).join('')||`<div class="empty">${T.none}</div>`}</div>
+  <h2>${T.inc}</h2>${inc.map(o=>`<div class="card"><div class="stk" style="justify-content:space-between"><strong>${o.id}</strong><span class="tag">${T.st[o.status||0]}</span></div><div>${o.items.filter(i=>i.s===biz).map(i=>`${i.q} × ${esc(i.n)}`).join(', ')}</div><small class="note">${esc(o.nm)} · ${esc(o.ph)} · ${esc(o.ad)}, ${esc(o.town)} · ${esc(o.pm)}${o.tx?' · '+esc(o.tx):''}</small>
+  <div class="stk" style="margin-top:.5rem;flex-wrap:wrap">${T.st.map((s,i)=>`<button class="btn ${i===(o.status||0)?'':'alt'}" data-o="${o.id}" data-s="${i}">${s}</button>`).join('')}</div></div>`).join('')||`<div class="empty">${T.none}</div>`}`;
+  bindAuth();
+  $('#add').onclick=async()=>{
+    const name=$('#pn').value.trim(),price=+$('#pp').value,bp=+$('#pb').value,bm=+$('#pm2').value,st=$('#pst').value;
+    if(!biz||!name||!(price>0)||st===''){$('#serr').textContent=T.lerr;return}
+    if(bp&&(bp>=price||bm<2)){$('#serr').textContent=T.berr;return}
+    const p={id:'c'+Date.now(),name,cat:$('#pc').value,icon:'📦',price,bulkPrice:bp||0,bulkMin:bp?bm:0,supplier:biz,stock:+st};
+    try{await api('/products',{method:'POST',body:p});await pull()}catch(e){$('#serr').textContent=e.message;return}sell();
+  };
+  document.querySelectorAll('[data-k]').forEach(b=>b.onclick=async()=>{try{await api('/stock/'+b.dataset.k,{method:'POST',body:{n:Math.max(0,+$('#k'+b.dataset.k).value||0)}});await pull()}catch(e){}sell()});
+  document.querySelectorAll('[data-o]').forEach(b=>b.onclick=async()=>{
+    try{await api('/orders/'+b.dataset.o+'/status',{method:'POST',body:{status:+b.dataset.s}});await pull()}catch(e){}sell();
+  });
+}
+applyLang();setOnline();render();pull();flush();setInterval(()=>{if(navigator.onLine)pull()},20000);
+if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
+</script>
+</body>
+</html>

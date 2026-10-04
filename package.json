@@ -1,0 +1,8 @@
+{
+  "name": "taitech-market",
+  "version": "1.0.0",
+  "description": "Marketplace for buyers and suppliers in South Sudan",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}
